@@ -28431,6 +28431,18 @@ var Tracks = /*#__PURE__*/function (_Component) {
       };
     });
 
+    _defineProperty(_assertThisInitialized(_this), "trackIcon", function (track) {
+      if (!track.preview_url) {
+        return _react.default.createElement("span", null, "N/A");
+      }
+
+      if (_this.state.playing && _this.state.playingPreviewUrl === track.preview_url) {
+        return _react.default.createElement("span", null, " | |");
+      }
+
+      return _react.default.createElement("span", null, "\u25B6");
+    });
+
     return _this;
   }
 
@@ -28440,7 +28452,9 @@ var Tracks = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       var tracks = this.props.tracks;
-      return _react.default.createElement("div", null, tracks.map(function (track) {
+      return _react.default.createElement("div", {
+        className: "row"
+      }, tracks.map(function (track) {
         var id = track.id,
             name = track.name,
             album = track.album,
@@ -28448,14 +28462,16 @@ var Tracks = /*#__PURE__*/function (_Component) {
         return _react.default.createElement("div", {
           key: id,
           onClick: _this2.playAudio(preview_url),
-          className: "track"
+          className: "col-md-4"
         }, _react.default.createElement("img", {
           src: album.images[0].url,
           alt: "track-image",
-          className: "track-name"
+          className: "img-thumbnail"
         }), _react.default.createElement("p", {
           className: "track-text"
-        }, name));
+        }, name), _react.default.createElement("p", {
+          className: "track-icon"
+        }, _this2.trackIcon(track)));
       }));
     }
   }]);
@@ -28548,7 +28564,7 @@ var Search = /*#__PURE__*/function (_Component) {
         placeholder: "Search for an artist"
       }), _react.default.createElement("button", {
         onClick: this.searchArtist,
-        className: "btn btn-default"
+        className: "btn btn-info mt-3"
       }, "Search"));
     }
   }]);
@@ -28791,7 +28807,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55047" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60935" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
